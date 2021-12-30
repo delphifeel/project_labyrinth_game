@@ -1,0 +1,8 @@
+{
+	"authServerAddr": "localhost",
+	"gameServerAddr": "localhost",
+	"authServerPort": 7001,
+	"gameServerPort": 7000,
+	"login": "dhatz",
+	"password": "1234"
+}
