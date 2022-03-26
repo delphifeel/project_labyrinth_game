@@ -5,5 +5,6 @@ using UnityEngine;
 public enum CommandType
 {
     PlayerMove = 0,
-    StartGame
+    StartGame,
+    PlayerInit,
 };

@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     private PlayerInfo playerInfo;
     private TCPClient client;
     private GameObject playerObject;
+    public CommandsProcessor commandsProcessor;
     private bool isGameStarted = false;
     private bool readyToStartGame = false;
 
@@ -34,7 +35,7 @@ public class GameController : MonoBehaviour
         else
         {
             Destroy(instance);
-        } 
+        }
     }
 
     void Start()
@@ -54,17 +55,25 @@ public class GameController : MonoBehaviour
 
         if ((readyToStartGame == true) && (isGameStarted == false))
         {
-            isGameStarted = true;
-            Debug.Log("Game started");
+            StartGame();
+            return;
+        }
+    }
 
-            Instantiate(backgroundBlockPrefab, new Vector2(0, 0), Quaternion.identity);
-            playerObject = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
-        }   
+    private void StartGame()
+    {
+        isGameStarted = true;
+        Debug.Log("Game started");
+
+        Instantiate(backgroundBlockPrefab, new Vector2(0, 0), Quaternion.identity);
+        playerObject = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
+
+        commandsProcessor = new CommandsProcessor(playerInfo, config);
     }
 
     private void OnReceiveFromAuthServer(byte[] command)
     {
-        AuthServerCommandType commandType = (AuthServerCommandType) BitConverter.ToUInt32(command, 4);
+        AuthServerCommandType commandType = (AuthServerCommandType)BitConverter.ToUInt32(command, 4);
         if (commandType == AuthServerCommandType.Authenticate)
         {
             SavePlayerTocken(command);
@@ -78,11 +87,6 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Unknown command type");
         }
-    }
-
-    private void StartGame()
-    {
-        readyToStartGame = true;
     }
 
     private void ParseStartGameResponse(byte[] command)
@@ -105,7 +109,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        StartGame();
+        readyToStartGame = true;
     }
 
     private void CheckJoinLobbyStatus(byte[] command)
@@ -116,7 +120,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Join lobby error");
             return;
         }
-        
+
         if (statusCode == 1)
         {
             playerInfo.PlayerId = BitConverter.ToUInt32(command, 12);
@@ -153,13 +157,13 @@ public class GameController : MonoBehaviour
         Array.Copy(validationHeaderBytes, 0, joinLobbyCommand, 0, validationHeaderBytes.Length);
 
         // command type
-        byte[] commandTypeBytes = BitConverter.GetBytes((uint) AuthServerCommandType.JoinLobby);
+        byte[] commandTypeBytes = BitConverter.GetBytes((uint)AuthServerCommandType.JoinLobby);
         Array.Copy(commandTypeBytes, 0, joinLobbyCommand, 4, commandTypeBytes.Length);
 
         // payload tocken
         Array.Copy(playerInfo.Token, 0, joinLobbyCommand, 8, playerInfo.Token.Length);
 
-        
+
         client.Send(joinLobbyCommand);
     }
     private void SendCredsToAuthServer()
@@ -167,7 +171,7 @@ public class GameController : MonoBehaviour
         byte[] loginCommand = new byte[68];
 
         // validation header
-        byte[] validationHeaderBytes = BitConverter.GetBytes((uint) 0xBADBEE);
+        byte[] validationHeaderBytes = BitConverter.GetBytes((uint)0xBADBEE);
         Array.Copy(validationHeaderBytes, 0, loginCommand, 0, validationHeaderBytes.Length);
 
         // command type
@@ -191,7 +195,7 @@ public class GameController : MonoBehaviour
 
     private void ConnectToAuthServer()
     {
-        client = new TCPClient(config.authServerAddr, (int) config.authServerPort);
+        client = new TCPClient(config.authServerAddr, (int)config.authServerPort);
         client.OnReceive = OnReceiveFromAuthServer;
         client.OnReady = SendCredsToAuthServer;
         client.Connect();
