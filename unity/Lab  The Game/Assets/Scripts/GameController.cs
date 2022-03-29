@@ -12,6 +12,8 @@ enum AuthServerCommandType
 
 public class GameController : MonoBehaviour
 {
+
+    private Queue<Action> nextUpdateActions = new Queue<Action>();
     private Config config;
     private PlayerInfo playerInfo;
     private TCPClient client;
@@ -20,10 +22,15 @@ public class GameController : MonoBehaviour
     private bool isGameStarted = false;
     private bool readyToStartGame = false;
 
-    public static GameController instance;
+    private Background background;
+    private Player player;
 
-    public GameObject backgroundBlockPrefab;
+    public static GameController instance;
+    public float BLOCK_SIZE = 40;
+
     public GameObject playerPrefab;
+    public GameObject BackgroundObject;
+
 
     // Use this for initialization
     void Awake()
@@ -36,6 +43,8 @@ public class GameController : MonoBehaviour
         {
             Destroy(instance);
         }
+
+        background = BackgroundObject.GetComponent<Background>();
     }
 
     void Start()
@@ -58,6 +67,13 @@ public class GameController : MonoBehaviour
             StartGame();
             return;
         }
+
+        ProcessUpdateActions();
+    }
+
+    private void OnPlayerMove(List<MoveDirection> moveDirections)
+    {
+        background.OnPlayerMove(moveDirections);
     }
 
     private void StartGame()
@@ -65,10 +81,36 @@ public class GameController : MonoBehaviour
         isGameStarted = true;
         Debug.Log("Game started");
 
-        Instantiate(backgroundBlockPrefab, new Vector2(0, 0), Quaternion.identity);
         playerObject = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
+        player = playerObject.GetComponent<Player>();
+        player.OnMove = OnPlayerMove;
 
         commandsProcessor = new CommandsProcessor(playerInfo, config);
+        commandsProcessor.OnPlayerInit = OnPlayerInit;
+        commandsProcessor.Start();
+    }
+
+    private void OnPlayerInit(PlayerInfo newPlayerInfo)
+    {
+        OnNextUpdate(() => {
+            background.AddBlock(BlockType.Center);
+            if (newPlayerInfo.LabPoint.TopConnectionId != 0)
+            {
+                background.AddBlock(BlockType.Top);
+            }
+            if (newPlayerInfo.LabPoint.RightConnectionId != 0)
+            {
+                background.AddBlock(BlockType.Right);
+            }
+            if (newPlayerInfo.LabPoint.BottomConnectionId != 0)
+            {
+                background.AddBlock(BlockType.Bottom);
+            }
+            if (newPlayerInfo.LabPoint.LeftConnectionId != 0)
+            {
+                background.AddBlock(BlockType.Left);
+            }
+        });
     }
 
     private void OnReceiveFromAuthServer(byte[] command)
@@ -199,5 +241,19 @@ public class GameController : MonoBehaviour
         client.OnReceive = OnReceiveFromAuthServer;
         client.OnReady = SendCredsToAuthServer;
         client.Connect();
+    }
+
+    private void OnNextUpdate(Action action)
+    {
+        nextUpdateActions.Enqueue(action);
+    }
+
+    private void ProcessUpdateActions()
+    {
+        foreach (Action action in nextUpdateActions)
+        {
+            action();
+        }
+        nextUpdateActions.Clear();
     }
 }

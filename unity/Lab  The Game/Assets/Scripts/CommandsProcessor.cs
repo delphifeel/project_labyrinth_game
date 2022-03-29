@@ -16,20 +16,23 @@ public class CommandsProcessor
 {
     private PlayerInfo playerInfo;
     private TCPClient client;
-    private Config config;
     private Action<List<MoveDirection>> onMove;
+
+    public Action<PlayerInfo> OnPlayerInit = null;
 
     public CommandsProcessor(PlayerInfo playerInfo, Config config)
     {
         this.playerInfo = playerInfo;
-        this.config = config;
 
         client = new TCPClient(config.gameServerAddr, (int)config.gameServerPort);
         client.OnReceive = OnReceiveCommand;
         client.OnReady = SendInit;
-        client.Connect();
     }
 
+    public void Start()
+    {
+        client.Connect();
+    }
     public void SendMove(List<MoveDirection> directions, Action<List<MoveDirection>> onMove)
     {
         this.onMove = onMove;
@@ -121,6 +124,11 @@ public class CommandsProcessor
         playerInfo.LabPoint.LeftConnectionId = BitConverter.ToUInt32(payload, 24);
         playerInfo.LabPoint.IsExit = BitConverter.ToBoolean(payload, 28);
         playerInfo.LabPoint.IsSpawn = BitConverter.ToBoolean(payload, 32);
+
+        if (OnPlayerInit != null)
+        {
+            OnPlayerInit(playerInfo);
+        }
     }
 
     private void ProcessPlayerMove(byte[] payload)
