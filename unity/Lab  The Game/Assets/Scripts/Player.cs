@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private bool isMoving = false;
-    private List<MoveDirection> moveDirections;
+    private Vector2 moveDirections = new Vector2(0, 0); 
     private CommandsProcessor commandsProcessor;
 
-    public Action<List<MoveDirection>> OnMove = null;
+    public Action<Vector2> OnMove = null;
 
     // Start is called before the first frame update
     void Start()
     {
         commandsProcessor = GameController.instance.commandsProcessor;
+        commandsProcessor.OnMove = OnSendMove;
     }
 
     // Update is called once per frame
@@ -25,40 +25,42 @@ public class Player : MonoBehaviour
 
     private void ProccessMovement()
     {
-        List<MoveDirection> directions = new List<MoveDirection>();
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            directions.Add(MoveDirection.Left);
+            moveDirections.x = -1;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            directions.Add(MoveDirection.Right);
+            moveDirections.x = 1;
         }
+        else if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            moveDirections.x = 0;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            directions.Add(MoveDirection.Top);
+            moveDirections.y = 1;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            directions.Add(MoveDirection.Bottom);
+            moveDirections.y = -1;
         }
-
-        if (directions.Count > 0)
+        else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
-            commandsProcessor.SendMove(directions, (List<MoveDirection> d) =>
-            {
-                isMoving = true;
-                moveDirections = d;
-            });
+            moveDirections.y = 0;
         }
 
-        if (isMoving)
+        if ((moveDirections.x != 0) || (moveDirections.y != 0))
         {
-            isMoving = false;
+            commandsProcessor.SendMove(moveDirections);
             OnMove(moveDirections);
-            
         }
+    }
+
+    private void OnSendMove(Vector2 moveDirections)
+    {
+        //this.moveDirections = moveDirections;
     }
 }

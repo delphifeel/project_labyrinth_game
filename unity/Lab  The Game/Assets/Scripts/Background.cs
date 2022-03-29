@@ -51,20 +51,10 @@ public class Background : MonoBehaviour
         block.transform.localScale = BLOCK_SCALE;
     }
 
-    public void OnPlayerMove(List<MoveDirection> moveDirections)
+    public void OnPlayerMove(Vector2 moveDirections)
     {
-        float x = 0;
-        float y = 0;
-        foreach (var direction in moveDirections)
-        {
-            switch (direction)
-            {
-                case MoveDirection.Left: x = 1; break;
-                case MoveDirection.Top: y = -1; break;
-                case MoveDirection.Right: x = -1; break;
-                case MoveDirection.Bottom: y = 1; break;
-            }
-        }
+        float x = -moveDirections.x;
+        float y = -moveDirections.y;
         transform.Translate(x, y, 0);
     }
 }

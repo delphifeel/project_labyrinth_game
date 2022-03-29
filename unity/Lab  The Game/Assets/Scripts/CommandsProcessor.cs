@@ -4,20 +4,20 @@ using UnityEngine;
 using System;
 using System.Text;
 
-public enum MoveDirection
-{
-    Top = 1,
-    Right,
-    Bottom,
-    Left,
-}
-
 public class CommandsProcessor
 {
+    private enum Direction
+    {
+        Top = 1,
+        Right,
+        Bottom,
+        Left,
+    };
+
     private PlayerInfo playerInfo;
     private TCPClient client;
-    private Action<List<MoveDirection>> onMove;
 
+    public Action<Vector2> OnMove;
     public Action<PlayerInfo> OnPlayerInit = null;
 
     public CommandsProcessor(PlayerInfo playerInfo, Config config)
@@ -33,15 +33,54 @@ public class CommandsProcessor
     {
         client.Connect();
     }
-    public void SendMove(List<MoveDirection> directions, Action<List<MoveDirection>> onMove)
+
+    private List<Direction> VectorDirectionToList(Vector2 directions)
     {
-        this.onMove = onMove;
-        byte[] payload = new byte[8];
-        byte[] buffer = BitConverter.GetBytes((uint)directions[0]);
-        Array.Copy(buffer, 0, payload, 0, buffer.Length);
-        if (directions.Count > 1)
+        List<Direction> result = new List<Direction>();
+        if (directions.x == 1)
         {
-            buffer = BitConverter.GetBytes((uint)directions[1]);
+            result.Add(Direction.Right);
+        } else if (directions.x == -1)
+        {
+            result.Add(Direction.Left);
+        }
+        
+        if (directions.y == 1)
+        {
+            result.Add(Direction.Top);
+        } else if (directions.y == -1)
+        {
+            result.Add(Direction.Bottom);
+        }
+
+        return result;
+    }
+
+    private Vector2 ListDirectionToVector(List<Direction> l)
+    {
+        Vector2 result = new Vector2(0, 0);
+        foreach (Direction d in l)
+        {
+            switch (d)
+            {
+                case Direction.Left: result.x = -1; break;
+                case Direction.Right: result.x = 1; break;
+                case Direction.Top: result.y = 1; break;
+                case Direction.Bottom: result.y = -1; break;
+            }
+        }
+        return result;
+    }
+
+    public void SendMove(Vector2 directions)
+    {
+        var directionsList = VectorDirectionToList(directions);
+        byte[] payload = new byte[8];
+        byte[] buffer = BitConverter.GetBytes((uint)directionsList[0]);
+        Array.Copy(buffer, 0, payload, 0, buffer.Length);
+        if (directionsList.Count > 1)
+        {
+            buffer = BitConverter.GetBytes((uint)directionsList[1]);
             Array.Copy(buffer, 0, payload, 4, buffer.Length);
         }
         
@@ -78,7 +117,7 @@ public class CommandsProcessor
 
     private byte[] MakeRequestCommand(CommandType commandType, byte[] payload)
     {
-        byte[] result = new byte[48 + payload.Length];
+        byte[] result = new byte[52 + payload.Length];
         int resultPos = 0;
         byte[] buffer;
 
@@ -105,6 +144,11 @@ public class CommandsProcessor
         // player token
         Array.Copy(playerInfo.Token, 0, result, resultPos, playerInfo.Token.Length);
         resultPos += playerInfo.Token.Length;
+
+        // payload size
+        buffer = BitConverter.GetBytes((uint)payload.Length);
+        Array.Copy(buffer, 0, result, resultPos, buffer.Length);
+        resultPos += 4;
 
         // payload
         Array.Copy(payload, 0, result, resultPos, payload.Length);
@@ -137,14 +181,14 @@ public class CommandsProcessor
         {
             return;
         }
-        List<MoveDirection> directions = new List<MoveDirection>();
-        directions.Add((MoveDirection) BitConverter.ToUInt32(payload, 4));
+        List<Direction> directions = new List<Direction>();
+        directions.Add((Direction) BitConverter.ToUInt32(payload, 4));
         uint secondDirection = BitConverter.ToUInt32(payload, 8);
         if (secondDirection != 0)
         {
-            directions.Add((MoveDirection)secondDirection);
+            directions.Add((Direction)secondDirection);
         }
 
-        this.onMove(directions);
+        this.OnMove(ListDirectionToVector(directions));
     }
 }

@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour
         ProcessUpdateActions();
     }
 
-    private void OnPlayerMove(List<MoveDirection> moveDirections)
+    private void OnPlayerMove(Vector2 moveDirections)
     {
         background.OnPlayerMove(moveDirections);
     }

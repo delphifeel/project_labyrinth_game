@@ -65,7 +65,7 @@ public class TCPClient
                 return;
             }
   
-            stream.Write(buffer, 0, buffer.Length);
+            stream.WriteAsync(buffer, 0, buffer.Length);
         }
         catch (SocketException socketException)
         {
