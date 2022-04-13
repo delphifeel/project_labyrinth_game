@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct LabPointType
+public struct PointInfoType
 {
-    public uint Id;
-    public uint TopConnectionId;
-    public uint RightConnectionId;
-    public uint BottomConnectionId;
-    public uint LeftConnectionId;
+    public bool HasTopConnection;
+    public bool HasRightConnection;
+    public bool HasBottomConnection;
+    public bool HasLeftConnection;
     public bool IsExit;
     public bool IsSpawn;
 }
@@ -22,5 +21,5 @@ public class PlayerInfo
 
     public int X = 0;
     public int Y = 0;
-    public LabPointType LabPoint;
+    public PointInfoType PointInfo;
 }

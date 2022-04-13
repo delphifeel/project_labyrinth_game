@@ -17,19 +17,19 @@ public class GameController : MonoBehaviour
     private Config config;
     private PlayerInfo playerInfo;
     private TCPClient client;
-    private GameObject playerObject;
-    public CommandsProcessor commandsProcessor;
+    private GameObject playerInst;
     private bool isGameStarted = false;
     private bool readyToStartGame = false;
-
     private Background background;
     private Player player;
 
+    public uint RoomSize = 0;
     public static GameController instance;
-    public float BLOCK_SIZE = 40;
+    public CommandsProcessor commandsProcessor;
 
-    public GameObject playerPrefab;
+    public GameObject PlayerPrefab;
     public GameObject BackgroundObject;
+    public GameObject CameraObject;
 
 
     // Use this for initialization
@@ -43,8 +43,6 @@ public class GameController : MonoBehaviour
         {
             Destroy(instance);
         }
-
-        background = BackgroundObject.GetComponent<Background>();
     }
 
     void Start()
@@ -53,6 +51,7 @@ public class GameController : MonoBehaviour
         config = Config.Load("CONFIG");
 
         ConnectToAuthServer();
+        background = BackgroundObject.GetComponent<Background>();
     }
 
     void Update()
@@ -70,20 +69,14 @@ public class GameController : MonoBehaviour
 
         ProcessUpdateActions();
     }
-
-    private void OnPlayerMove(Vector2 moveDirections)
-    {
-        background.OnPlayerMove(moveDirections);
-    }
-
     private void StartGame()
     {
         isGameStarted = true;
         Debug.Log("Game started");
 
-        playerObject = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
-        player = playerObject.GetComponent<Player>();
-        player.OnMove = OnPlayerMove;
+        playerInst = Instantiate(PlayerPrefab, new Vector2(0, 0), Quaternion.identity);
+        player = playerInst.GetComponent<Player>();
+        CameraObject.GetComponent<CameraBehaviour>().playerInst = playerInst;
 
         commandsProcessor = new CommandsProcessor(playerInfo, config);
         commandsProcessor.OnPlayerInit = OnPlayerInit;
@@ -93,23 +86,8 @@ public class GameController : MonoBehaviour
     private void OnPlayerInit(PlayerInfo newPlayerInfo)
     {
         OnNextUpdate(() => {
-            background.AddBlock(BlockType.Center);
-            if (newPlayerInfo.LabPoint.TopConnectionId != 0)
-            {
-                background.AddBlock(BlockType.Top);
-            }
-            if (newPlayerInfo.LabPoint.RightConnectionId != 0)
-            {
-                background.AddBlock(BlockType.Right);
-            }
-            if (newPlayerInfo.LabPoint.BottomConnectionId != 0)
-            {
-                background.AddBlock(BlockType.Bottom);
-            }
-            if (newPlayerInfo.LabPoint.LeftConnectionId != 0)
-            {
-                background.AddBlock(BlockType.Left);
-            }
+            player.InitPosition(new Vector2(newPlayerInfo.X, newPlayerInfo.Y));
+            background.BuildWallsAroundPlayer(newPlayerInfo);
         });
     }
 

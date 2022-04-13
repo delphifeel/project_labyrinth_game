@@ -13,48 +13,52 @@ public enum BlockType
 
 public class Background : MonoBehaviour
 {
-    private Vector2 BLOCK_SCALE;
-
     public GameObject BlockPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
-        Vector2 size = BlockPrefab.GetComponent<Renderer>().bounds.size;
-        BLOCK_SCALE = new Vector2(
-            GameController.instance.BLOCK_SIZE / size.x,
-            GameController.instance.BLOCK_SIZE / size.y
-        );
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void AddBlock(BlockType blockType)
+    public void BuildWallsAroundPlayer(PlayerInfo playerInfo)
     {
-        int posX = 0;
-        int posY = 0;
-        switch (blockType)
+        Vector2 wallSize = BlockPrefab.GetComponent<Renderer>().bounds.size;
+        float ROOM_SIZE = GameController.instance.RoomSize;
+        // top wall
+        if (!playerInfo.PointInfo.HasTopConnection)
         {
-            case BlockType.Top: { posX = 0; posY = 1; break; }
-            case BlockType.Bottom: { posX = 0; posY = -1; break; }
-            case BlockType.Right: { posX = 1; posY = 0; break; }
-            case BlockType.Left: { posX = -1; posY = 0; break; }
+            _AddWall(new Vector2(0, ROOM_SIZE / 2 + wallSize.y / 2),
+                    new Vector2(ROOM_SIZE / wallSize.x, 1));
         }
-
-        float x = posX * GameController.instance.BLOCK_SIZE;
-        float y = posY * GameController.instance.BLOCK_SIZE;
-
-        GameObject block = Instantiate(BlockPrefab, new Vector2(x, y), Quaternion.identity, transform);
-        block.transform.localScale = BLOCK_SCALE;
+        // right wall
+        if (!playerInfo.PointInfo.HasRightConnection)
+        {
+            _AddWall(new Vector2(ROOM_SIZE / 2 + wallSize.x / 2, 0),
+                    new Vector2(1, ROOM_SIZE / wallSize.y));
+        }
+        // bottom wall
+        if (!playerInfo.PointInfo.HasBottomConnection)
+        {
+            _AddWall(new Vector2(0, -ROOM_SIZE / 2 - wallSize.y / 2),
+                     new Vector2(ROOM_SIZE / wallSize.x, 1));
+        }
+        // left wall
+        if (!playerInfo.PointInfo.HasLeftConnection)
+        {
+            _AddWall(new Vector2(-ROOM_SIZE / 2 - wallSize.x / 2, 0),
+                    new Vector2(1, ROOM_SIZE / wallSize.y));
+        }
     }
 
-    public void OnPlayerMove(Vector2 moveDirections)
+    private void _AddWall(Vector2 pos, Vector2 scale)
     {
-        float x = -moveDirections.x;
-        float y = -moveDirections.y;
-        transform.Translate(x, y, 0);
+        GameObject block = Instantiate(BlockPrefab, pos, Quaternion.identity, transform);
+        block.transform.localScale = scale;
     }
 }

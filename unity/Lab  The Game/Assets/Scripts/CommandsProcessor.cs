@@ -17,7 +17,7 @@ public class CommandsProcessor
     private PlayerInfo playerInfo;
     private TCPClient client;
 
-    public Action<Vector2> OnMove;
+    public Action<bool, Vector2, Vector2> OnMove;
     public Action<PlayerInfo> OnPlayerInit = null;
 
     public CommandsProcessor(PlayerInfo playerInfo, Config config)
@@ -112,7 +112,8 @@ public class CommandsProcessor
 
     private void SendInit()
     {
-        client.Send(MakeRequestCommand(CommandType.PlayerInit, new byte[4]));
+        var dummy = new byte[4];
+        client.Send(MakeRequestCommand(CommandType.PlayerInit, dummy));
     }
 
     private byte[] MakeRequestCommand(CommandType commandType, byte[] payload)
@@ -161,13 +162,13 @@ public class CommandsProcessor
     {
         playerInfo.X = BitConverter.ToInt32(payload, 0);
         playerInfo.Y = BitConverter.ToInt32(payload, 4);
-        playerInfo.LabPoint.Id = BitConverter.ToUInt32(payload, 8);
-        playerInfo.LabPoint.TopConnectionId = BitConverter.ToUInt32(payload, 12);
-        playerInfo.LabPoint.RightConnectionId = BitConverter.ToUInt32(payload, 16);
-        playerInfo.LabPoint.BottomConnectionId = BitConverter.ToUInt32(payload, 20);
-        playerInfo.LabPoint.LeftConnectionId = BitConverter.ToUInt32(payload, 24);
-        playerInfo.LabPoint.IsExit = BitConverter.ToBoolean(payload, 28);
-        playerInfo.LabPoint.IsSpawn = BitConverter.ToBoolean(payload, 32);
+        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 8);
+        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 12);
+        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 16);
+        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 20);
+        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 24);
+        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 28);
+        GameController.instance.RoomSize = BitConverter.ToUInt32(payload, 32);
 
         if (OnPlayerInit != null)
         {
@@ -177,18 +178,22 @@ public class CommandsProcessor
 
     private void ProcessPlayerMove(byte[] payload)
     {
-        if (BitConverter.ToBoolean(payload, 0) == false)
-        {
-            return;
-        }
+        // is success ?
+        bool success = BitConverter.ToBoolean(payload, 0);
         List<Direction> directions = new List<Direction>();
-        directions.Add((Direction) BitConverter.ToUInt32(payload, 4));
-        uint secondDirection = BitConverter.ToUInt32(payload, 8);
-        if (secondDirection != 0)
+        if (success)
         {
-            directions.Add((Direction)secondDirection);
+            directions.Add((Direction)BitConverter.ToUInt32(payload, 4));
+            uint secondDirection = BitConverter.ToUInt32(payload, 8);
+            if (secondDirection != 0)
+            {
+                directions.Add((Direction)secondDirection);
+            }
         }
+     
+        int posX = BitConverter.ToInt32(payload, 12);
+        int posY = BitConverter.ToInt32(payload, 16);
 
-        this.OnMove(ListDirectionToVector(directions));
+        OnMove(success, ListDirectionToVector(directions), new Vector2(posX, posY));
     }
 }
