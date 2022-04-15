@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
 
     private Queue<Action> nextUpdateActions = new Queue<Action>();
     private Config config;
-    private PlayerInfo playerInfo;
     private TCPClient client;
     private GameObject playerInst;
     private bool isGameStarted = false;
@@ -23,9 +22,10 @@ public class GameController : MonoBehaviour
     private Background background;
     private Player player;
 
-    public uint RoomSize = 0;
     public static GameController instance;
+    public uint roomSize = 0;
     public CommandsProcessor commandsProcessor;
+    public PlayerInfo playerInfo;
 
     public GameObject PlayerPrefab;
     public GameObject BackgroundObject;
@@ -78,16 +78,37 @@ public class GameController : MonoBehaviour
         player = playerInst.GetComponent<Player>();
         CameraObject.GetComponent<CameraBehaviour>().playerInst = playerInst;
 
-        commandsProcessor = new CommandsProcessor(playerInfo, config);
+        commandsProcessor = new CommandsProcessor(config);
         commandsProcessor.OnPlayerInit = OnPlayerInit;
+        commandsProcessor.OnMove = OnPlayerMove;
         commandsProcessor.Start();
     }
 
-    private void OnPlayerInit(PlayerInfo newPlayerInfo)
+    public void SendMove(Vector2 directions)
+    {
+        commandsProcessor.SendMove(directions);
+    }
+
+    public void UpdateBackgroud()
+    {
+        background.UpdateRoom(playerInfo.PointInfo);
+    }
+
+    private void OnPlayerMove(bool success, Vector2 directions, Vector2 position)
+    {
+        player.OnServerMove(position);
+        OnNextUpdate(() =>
+        {
+            UpdateBackgroud();
+        });
+    }
+
+    private void OnPlayerInit()
     {
         OnNextUpdate(() => {
-            player.InitPosition(new Vector2(newPlayerInfo.X, newPlayerInfo.Y));
-            background.BuildWallsAroundPlayer(newPlayerInfo);
+            player.InitPosition(new Vector2(playerInfo.X, playerInfo.Y));
+            background.Init(roomSize);
+            UpdateBackgroud();
         });
     }
 

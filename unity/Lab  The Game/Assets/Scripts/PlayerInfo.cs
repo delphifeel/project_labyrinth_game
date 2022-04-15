@@ -19,7 +19,8 @@ public class PlayerInfo
     public uint PlayerId = 0;
     public byte[] Token = null;
 
-    public int X = 0;
-    public int Y = 0;
+    public float X = 0;
+    public float Y = 0;
+    public float Speed = 0;
     public PointInfoType PointInfo;
 }

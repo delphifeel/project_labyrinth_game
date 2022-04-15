@@ -52,7 +52,7 @@ public class TCPClient
     {
         if (socketConnection == null)
         {
-            Debug.Log("socker connection is null");
+            Debug.Log("socket connection is null");
             return;
         }
         try

@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Vector2 collisionVelocity = new Vector2(0, 0);
-    private Vector2 moveDirections = new Vector2(0, 0);
+    private Vector2 moveDirections = Vector2.zero;
     private Vector2 posFromServer = Vector2.zero;
     private bool isInit = false;
   
-    private CommandsProcessor commandsProcessor;
     private Rigidbody2D rb;
-    private ContactPoint2D[] collisionPoints = new ContactPoint2D[10];
-    private int collisionPointsCount = 0;
+    //private ContactPoint2D[] collisionPoints = new ContactPoint2D[10];
+    //private int collisionPointsCount = 0;
 
     public void InitPosition(Vector2 newPosition)
     {
@@ -25,14 +23,15 @@ public class Player : MonoBehaviour
         isInit = true;
         rb.MovePosition(newPosition);
     }
+    public void OnServerMove(Vector2 position)
+    {
+        posFromServer = position;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        commandsProcessor = GameController.instance.commandsProcessor;
-        commandsProcessor.OnMove = OnMoveFromServer;
     }
 
     private void Update()
@@ -49,14 +48,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (collisionVelocity != Vector2.zero)
-        {
-            moveDirections += collisionVelocity;
-        }
-
         if ((moveDirections.x != 0) || (moveDirections.y != 0))
         {
-            commandsProcessor.SendMove(moveDirections);
+            GameController.instance.SendMove(moveDirections);
             Move(moveDirections);
         }
     }
@@ -93,25 +87,9 @@ public class Player : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        rb.MovePosition(rb.position + direction);
+        float speed = GameController.instance.playerInfo.Speed;
+        Vector2 step = new Vector2(direction.x * speed, direction.y * speed);
+        rb.MovePosition(rb.position + step);
     }
 
-    private void OnMoveFromServer(bool success ,Vector2 moveDirections, Vector2 position)
-    {
-        posFromServer = position;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-       
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-      
-    }
 }

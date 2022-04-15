@@ -173,7 +173,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a51ed7c90950ce46871a2ea7aa75d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomSize: 0
   PlayerPrefab: {fileID: 4028417842514030520, guid: e2dfa7f8bf42c8a4894d82d32e2f08f2, type: 3}
   BackgroundObject: {fileID: 1933241051}
   CameraObject: {fileID: 519420028}
@@ -296,6 +297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockPrefab: {fileID: 4717330391702845369, guid: 2f882a0f90768804ea020d0905743e32, type: 3}
+  FloorPrefab: {fileID: 7711303169160146803, guid: 7f888ab04b6e23a45bc738d357dbfea7, type: 3}
+  ExitPrefab: {fileID: 5710396860180518875, guid: 9482d2e584f14af4991fc08ecc3d4009, type: 3}
 --- !u!4 &1933241053
 Transform:
   m_ObjectHideFlags: 0

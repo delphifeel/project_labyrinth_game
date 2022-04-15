@@ -14,16 +14,13 @@ public class CommandsProcessor
         Left,
     };
 
-    private PlayerInfo playerInfo;
     private TCPClient client;
 
-    public Action<bool, Vector2, Vector2> OnMove;
-    public Action<PlayerInfo> OnPlayerInit = null;
+    public Action<bool, Vector2, Vector2> OnMove = null;
+    public Action OnPlayerInit = null;
 
-    public CommandsProcessor(PlayerInfo playerInfo, Config config)
+    public CommandsProcessor(Config config)
     {
-        this.playerInfo = playerInfo;
-
         client = new TCPClient(config.gameServerAddr, (int)config.gameServerPort);
         client.OnReceive = OnReceiveCommand;
         client.OnReady = SendInit;
@@ -121,6 +118,7 @@ public class CommandsProcessor
         byte[] result = new byte[52 + payload.Length];
         int resultPos = 0;
         byte[] buffer;
+        PlayerInfo playerInfo = GameController.instance.playerInfo;
 
         // validation header
         buffer = BitConverter.GetBytes((uint)0xDEADBEAF);
@@ -160,19 +158,21 @@ public class CommandsProcessor
 
     private void ProcessPlayerInit(byte[] payload)
     {
-        playerInfo.X = BitConverter.ToInt32(payload, 0);
-        playerInfo.Y = BitConverter.ToInt32(payload, 4);
-        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 8);
-        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 12);
-        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 16);
-        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 20);
-        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 24);
-        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 28);
-        GameController.instance.RoomSize = BitConverter.ToUInt32(payload, 32);
+        PlayerInfo playerInfo = GameController.instance.playerInfo;
+        playerInfo.X = BitConverter.ToSingle(payload, 0);
+        playerInfo.Y = BitConverter.ToSingle(payload, 4);
+        playerInfo.Speed = BitConverter.ToSingle(payload, 8);
+        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 12);
+        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 16);
+        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 20);
+        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 24);
+        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 28);
+        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 32);
+        GameController.instance.roomSize = BitConverter.ToUInt32(payload, 36);
 
         if (OnPlayerInit != null)
         {
-            OnPlayerInit(playerInfo);
+            OnPlayerInit();
         }
     }
 
@@ -191,8 +191,18 @@ public class CommandsProcessor
             }
         }
      
-        int posX = BitConverter.ToInt32(payload, 12);
-        int posY = BitConverter.ToInt32(payload, 16);
+        float posX = BitConverter.ToSingle(payload, 12);
+        float posY = BitConverter.ToSingle(payload, 16);
+
+        // TODO: duplicate in ProcessPlayerInit
+        // Room info
+        PlayerInfo playerInfo = GameController.instance.playerInfo;
+        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 20);
+        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 24);
+        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 28);
+        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 32);
+        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 36);
+        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 40);
 
         OnMove(success, ListDirectionToVector(directions), new Vector2(posX, posY));
     }
