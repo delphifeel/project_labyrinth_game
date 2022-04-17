@@ -12,6 +12,13 @@ public struct PointInfoType
     public bool IsSpawn;
 }
 
+public class OtherPlayer
+{
+    public uint Id;
+    public float X;
+    public float Y;
+}
+
 public class PlayerInfo
 {
     public uint SessionIndex = 0;
@@ -23,4 +30,5 @@ public class PlayerInfo
     public float Y = 0;
     public float Speed = 0;
     public PointInfoType PointInfo;
+    public List<OtherPlayer> NearPlayers = new List<OtherPlayer>();
 }

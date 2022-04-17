@@ -162,13 +162,27 @@ public class CommandsProcessor
         playerInfo.X = BitConverter.ToSingle(payload, 0);
         playerInfo.Y = BitConverter.ToSingle(payload, 4);
         playerInfo.Speed = BitConverter.ToSingle(payload, 8);
-        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 12);
-        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 16);
-        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 20);
-        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 24);
-        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 28);
-        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 32);
-        GameController.instance.roomSize = BitConverter.ToUInt32(payload, 36);
+        GameController.instance.roomSize = BitConverter.ToUInt32(payload, 12);
+        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 16);
+        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 20);
+        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, 24);
+        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, 28);
+        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 32);
+        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 36);
+        uint nearPlayersCount = BitConverter.ToUInt32(payload, 40);
+        int offset = 44;
+        while (nearPlayersCount > 0)
+        {
+            OtherPlayer nearPlayer = new OtherPlayer();
+            nearPlayer.Id = BitConverter.ToUInt32(payload, offset);
+            offset += 4;
+            nearPlayer.X = BitConverter.ToSingle(payload, offset);
+            offset += 4;
+            nearPlayer.Y = BitConverter.ToSingle(payload, offset);
+            offset += 4;
+            nearPlayersCount--;
+            playerInfo.NearPlayers.Add(nearPlayer);
+        }
 
         if (OnPlayerInit != null)
         {
@@ -178,9 +192,9 @@ public class CommandsProcessor
 
     private void ProcessPlayerMove(byte[] payload)
     {
-        // is success ?
-        bool success = BitConverter.ToBoolean(payload, 0);
+        bool success = BitConverter.ToBoolean(payload, 0); 
         List<Direction> directions = new List<Direction>();
+        Vector2 directionsVec = Vector2.zero;
         if (success)
         {
             directions.Add((Direction)BitConverter.ToUInt32(payload, 4));
@@ -189,13 +203,11 @@ public class CommandsProcessor
             {
                 directions.Add((Direction)secondDirection);
             }
+            directionsVec = ListDirectionToVector(directions);
         }
-     
+
         float posX = BitConverter.ToSingle(payload, 12);
         float posY = BitConverter.ToSingle(payload, 16);
-
-        // TODO: duplicate in ProcessPlayerInit
-        // Room info
         PlayerInfo playerInfo = GameController.instance.playerInfo;
         playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, 20);
         playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, 24);
@@ -204,6 +216,28 @@ public class CommandsProcessor
         playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, 36);
         playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, 40);
 
-        OnMove(success, ListDirectionToVector(directions), new Vector2(posX, posY));
+        // near players
+        uint nearPlayersCount = BitConverter.ToUInt32(payload, 44);
+        int offset = 48;
+        while (nearPlayersCount > 0)
+        {
+            uint nearPlayerId = BitConverter.ToUInt32(payload, offset);
+            offset += 4;
+
+            OtherPlayer nearPlayer = playerInfo.NearPlayers.Find(p => p.Id == nearPlayerId);
+            if (nearPlayer == null)
+            {
+                nearPlayer = new OtherPlayer();
+                playerInfo.NearPlayers.Add(nearPlayer);
+            }
+
+            nearPlayer.X = BitConverter.ToSingle(payload, offset);
+            offset += 4;
+            nearPlayer.Y = BitConverter.ToSingle(payload, offset);
+            offset += 4;
+            nearPlayersCount--;
+        }
+
+        OnMove(success, directionsVec, new Vector2(posX, posY));
     }
 }
