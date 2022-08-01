@@ -19,10 +19,12 @@ public class Background : MonoBehaviour
     private GameObject bottomWall;
     private GameObject leftWall;
     private GameObject exit;
+    private Dictionary<uint, GameObject> nearPlayersObjects = new Dictionary<uint, GameObject>();
 
     public GameObject BlockPrefab;
     public GameObject FloorPrefab;
     public GameObject ExitPrefab;
+    public GameObject NearPlayerPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,30 @@ public class Background : MonoBehaviour
         this.roomSize = roomSize;
         _BuildFloor(new Vector2(0, 0));
         _BuildWalls();
+    }
+
+    public void UpdateNearPlayers(uint myId, List<OtherPlayer> nearPlayers)
+    {
+        // TODO: destroy near player game object if out of room
+
+        foreach(OtherPlayer nearPlayer in nearPlayers)
+        {
+            if (nearPlayer.Id == myId)
+            {
+                continue;
+            }
+   
+            // create near player object
+            if (!nearPlayersObjects.ContainsKey(nearPlayer.Id))
+            {
+                GameObject instance = Instantiate(NearPlayerPrefab, Vector2.zero, Quaternion.identity, transform);
+                nearPlayersObjects.Add(nearPlayer.Id, instance);
+            }
+   
+            // move to current position
+            Vector2 pos = new Vector2(nearPlayer.X, nearPlayer.Y);
+            nearPlayersObjects[nearPlayer.Id].transform.position = pos;
+        }
     }
 
     public void UpdateRoom(PointInfoType room)

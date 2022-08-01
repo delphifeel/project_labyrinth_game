@@ -158,6 +158,7 @@ public class CommandsProcessor
 
     private void ProcessPlayerInit(byte[] payload)
     {
+        Debug.Log("Player init response");
         PlayerInfo playerInfo = GameController.instance.playerInfo;
         playerInfo.X = BitConverter.ToSingle(payload, 0);
         playerInfo.Y = BitConverter.ToSingle(payload, 4);

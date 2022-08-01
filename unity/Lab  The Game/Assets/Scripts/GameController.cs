@@ -12,7 +12,7 @@ enum AuthServerCommandType
 
 public class GameController : MonoBehaviour
 {
-
+    private LogRedirect logRedirect = new LogRedirect();
     private Queue<Action> nextUpdateActions = new Queue<Action>();
     private Config config;
     private TCPClient client;
@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
         {
             Destroy(instance);
         }
+
+        logRedirect.Enable();
     }
 
     void Start()
@@ -92,6 +94,7 @@ public class GameController : MonoBehaviour
     public void UpdateBackgroud()
     {
         background.UpdateRoom(playerInfo.PointInfo);
+        background.UpdateNearPlayers(playerInfo.PlayerId, playerInfo.NearPlayers);
     }
 
     private void OnPlayerMove(bool success, Vector2 directions, Vector2 position)
@@ -132,24 +135,7 @@ public class GameController : MonoBehaviour
 
     private void ParseStartGameResponse(byte[] command)
     {
-        Debug.Log("Got `StartGame` response");
-
-        for (int i = 12; i < command.Length; i += 12)
-        {
-            uint playerId = BitConverter.ToUInt32(command, i);
-            uint playerIndex = BitConverter.ToUInt32(command, i + 4);
-            uint sessionIndex = BitConverter.ToUInt32(command, i + 8);
-
-            Debug.Log(string.Format("Player {0} = player index: {1}, session index: {2}", playerId, playerIndex, sessionIndex));
-
-            if (playerId == playerInfo.PlayerId)
-            {
-                playerInfo.PlayerIndex = playerIndex;
-                playerInfo.SessionIndex = sessionIndex;
-                break;
-            }
-        }
-
+        Debug.Log("Got `StartGame` command");
         readyToStartGame = true;
     }
 
@@ -161,18 +147,17 @@ public class GameController : MonoBehaviour
             Debug.Log("Join lobby error");
             return;
         }
-
-        if (statusCode == 1)
+        if (playerInfo.PlayerId == 0)
         {
             playerInfo.PlayerId = BitConverter.ToUInt32(command, 12);
+            playerInfo.PlayerIndex = BitConverter.ToUInt32(command, 16);
+            playerInfo.SessionIndex = BitConverter.ToUInt32(command, 20);
             Debug.Log("Joined lobby successfully. Player id: " + playerInfo.PlayerId);
-            return;
         }
 
         if (statusCode == 2)
         {
             ParseStartGameResponse(command);
-            return;
         }
     }
 

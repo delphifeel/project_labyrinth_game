@@ -299,6 +299,7 @@ MonoBehaviour:
   BlockPrefab: {fileID: 4717330391702845369, guid: 2f882a0f90768804ea020d0905743e32, type: 3}
   FloorPrefab: {fileID: 7711303169160146803, guid: 7f888ab04b6e23a45bc738d357dbfea7, type: 3}
   ExitPrefab: {fileID: 5710396860180518875, guid: 9482d2e584f14af4991fc08ecc3d4009, type: 3}
+  NearPlayerPrefab: {fileID: 9018649863742431611, guid: 4f6d9dd149bdd3e4eaf391ea84887f32, type: 3}
 --- !u!4 &1933241053
 Transform:
   m_ObjectHideFlags: 0
