@@ -12,23 +12,22 @@ public struct PointInfoType
     public bool IsSpawn;
 }
 
-public class OtherPlayer
-{
-    public uint Id;
-    public float X;
-    public float Y;
-}
-
 public class PlayerInfo
 {
-    public uint SessionIndex = 0;
-    public uint PlayerIndex = 0;
-    public uint PlayerId = 0;
-    public byte[] Token = null;
+    // TODO: empty mocked token
+    public byte[] Token = new byte[32];
 
-    public float X = 0;
-    public float Y = 0;
-    public float Speed = 0;
     public PointInfoType PointInfo;
-    public List<OtherPlayer> NearPlayers = new List<OtherPlayer>();
+
+    override public string ToString()
+    {
+        return string.Format("IsExit={0}, IsSpawn={1}, Connections = [{2}, {3}, {4}, {5}]", 
+            PointInfo.IsExit,
+            PointInfo.IsSpawn,
+            PointInfo.HasTopConnection,
+            PointInfo.HasRightConnection,
+            PointInfo.HasBottomConnection,
+            PointInfo.HasLeftConnection
+        );
+    }
 }

@@ -79,7 +79,7 @@ public class TCPClient
         {
             socketConnection = new TcpClient(serverAddr, serverPort);
             OnReady();
-            Byte[] bytes = new Byte[1024];
+            byte[] bytes = new byte[1024];
             while (true)
             {
                 // Get a stream object for reading 				

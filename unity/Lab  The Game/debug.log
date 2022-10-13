@@ -3,3 +3,47 @@ Joined lobby successfully. Player id: 1
 Got `StartGame` command
 Game started
 Player init response
+ArgumentException: JSON parse error: Missing a name for object member.
+ArgumentException: JSON parse error: Missing a name for object member.
+NullReferenceException: Object reference not set to an instance of an object
+Should not be capturing when there is a hotcontrol
+NullReferenceException: Object reference not set to an instance of an object
+Should not be capturing when there is a hotcontrol
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+OnRecvThreadStart socket exception: System.Net.Sockets.SocketException (0x80004005): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+OnRecvThreadStart socket exception: System.Net.Sockets.SocketException (0x80004005): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+UnityException: get_isActiveAndEnabled can only be called from the main thread.
+Constructors and field initializers will be executed from the loading thread when loading a scene.
+Don't use this function in the constructor or field initializers, instead move initialization code to the Awake or Start function.
+Should not be capturing when there is a hotcontrol
+Got command
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+OnRecvThreadStart socket exception: System.Net.Sockets.SocketException (0x80004005): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+Should not be capturing when there is a hotcontrol
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Should not be capturing when there is a hotcontrol
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Got command
+Should not be capturing when there is a hotcontrol
+Got command
+OnRecvThreadStart socket exception: System.Net.Sockets.SocketException (0x80004005): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Got packet JoinLobby
+Game Started
+Got packet StartGame
+Game Started
+Got packet StartGame
+PlayerInfo
+Game Started
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [True, False, True, False]
+Game Started
+Should not be capturing when there is a hotcontrol
