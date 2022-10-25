@@ -5,6 +5,7 @@ enum PacketType
 {
     StartGame = 0,
     TurnInfo,
+    RegisterTurn,
 };
 
 enum Status
@@ -12,22 +13,30 @@ enum Status
     Ok = 0,
     Error,
 }
+
 public class Communication
 {
     readonly string SERVER_ADDR = "localhost";
     readonly int SERVER_PORT = 7000;
     readonly TCPClient client;
-    readonly PlayerInfo playerInfo;
+    TurnState turnState;
 
-    public Communication(PlayerInfo playerInfo)
+    public Communication()
     {
-        this.playerInfo = playerInfo;
-
         client = new TCPClient(SERVER_ADDR, SERVER_PORT)
         {
             OnReceive = ProcessPacketFromServer,
             OnReady = SendJoinLobby
         };
+    }
+
+    public void Init(TurnState turnState)
+    {
+        this.turnState = turnState; 
+        turnState.OnNotResetChange(() =>
+        {
+            SendTurnInfo(turnState);
+        });
     }
 
     public void Start()
@@ -44,12 +53,18 @@ public class Communication
         if (status != Status.Ok)
         {
             Debug.Log(string.Format("Packet {0} is not Ok", packetType));
+            
+            if (packetType == PacketType.RegisterTurn)
+            {
+                Debug.Log("Register turn error");
+            }
+
             return;
         }
-        
+
         // TODO: test token etc.
 
-        uint payloadSize =  BitConverter.ToUInt32(packet, 44);
+        uint payloadSize = BitConverter.ToUInt32(packet, 44);
         byte[] payload = new byte[payloadSize];
         Array.Copy(packet, 48, payload, 0, payloadSize);
 
@@ -58,40 +73,16 @@ public class Communication
             case PacketType.StartGame: 
                 ProcessStartGame(payload);
                 break;
-            default: 
-                Debug.LogError("Unknown packet");
-                return;
+            case PacketType.TurnInfo:
+                ProcessTurnInfo(payload);
+                break;
         }
     }
 
-    private void ProcessStartGame(byte[] payload)
-    {
-        int pos = 0;
-        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        Debug.Log(playerInfo.ToString());
-
-        GameController.instance.StartGame();
-    }
-
+   
     private byte[] MakeRequestPacket(PacketType packetType, byte[] payload)
     {
+        var playerInfo = GameController.instance.PlayerInfo;
         byte[] result = new byte[48 + payload.Length];
         int resultPos = 0;
         byte[] buffer;
@@ -122,8 +113,58 @@ public class Communication
         return result;
     }
 
+    private void SendTurnInfo(TurnState turnState)
+    {
+        byte[] payload = new byte[8];
+        int payloadPos = 0;
+        byte[] buffer;
+
+        // Is player moving
+        buffer = BitConverter.GetBytes((uint)(turnState.IsPlayerMoving ? 1 : 0));
+        Array.Copy(buffer, 0, payload, payloadPos, buffer.Length);
+        payloadPos += buffer.Length;
+
+        // Move direction
+        buffer = BitConverter.GetBytes((uint)turnState.PlayerMoveDirection);
+        Array.Copy(buffer, 0, payload, payloadPos, buffer.Length);
+        payloadPos += buffer.Length;
+
+        byte[] packetBuffer = MakeRequestPacket(PacketType.RegisterTurn, payload);
+        client.Send(packetBuffer);
+    }
+
+    private void ProcessStartGame(byte[] payload)
+    {
+        ProcessTurnInfo(payload);
+        GameController.instance.StartGame();
+    }
+
     private void ProcessTurnInfo(byte[] payload)
     {
+        var playerInfo = GameController.instance.PlayerInfo;
+
+        int pos = 0;
+        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, pos);
+        pos += 4;
+
+        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, pos);
+        pos += 4;
+
+        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, pos);
+        pos += 4;
+
+        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, pos);
+        pos += 4;
+
+        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, pos);
+        pos += 4;
+
+        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, pos);
+        //pos += 4;
+
+        Debug.Log(playerInfo);
+
+        turnState.Reset();
     }
 
     private void SendJoinLobby()

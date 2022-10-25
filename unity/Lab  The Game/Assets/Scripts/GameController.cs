@@ -7,12 +7,16 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    private LogRedirect logRedirect = new LogRedirect();
-    private Queue<Action> nextUpdateActions = new Queue<Action>();
-    private Communication communication;
-    private PlayerInfo playerInfo;
+    readonly UpdateQueue updateQueue = new();
+    readonly LogRedirect logRedirect = new();
+    readonly InputProcessor inputProcessor = new();
+    readonly Communication communication = new();
+
+    public TurnState TurnState { get; } = new();
+    public PlayerInfo PlayerInfo { get; } = new();
 
     public static GameController instance;
+    public GameObject Visuals;
 
 
     // Use this for initialization
@@ -32,33 +36,23 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        playerInfo = new PlayerInfo();
-
-        communication = new Communication(playerInfo);
+        TurnState.Reset();
+        communication.Init(TurnState);
         communication.Start();
     }
 
     void Update()
     {
-        ProcessUpdateActions();
+        updateQueue.Process();
+        inputProcessor.Process();
     }
 
     public void StartGame()
     {
         Debug.Log("Game Started");
-    }
-
-    public void OnNextUpdate(Action action)
-    {
-        nextUpdateActions.Enqueue(action);
-    }
-
-    private void ProcessUpdateActions()
-    {
-        foreach (Action action in nextUpdateActions)
+        updateQueue.OnNextUpdate(() =>
         {
-            action();
-        }
-        nextUpdateActions.Clear();
+            Visuals.SetActive(true);
+        });
     }
 }
