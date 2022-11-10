@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Text;
 
 enum PacketType
 {
@@ -46,10 +49,14 @@ public class Communication
 
     private void ProcessPacketFromServer(byte[] packet)
     {
-        PacketType packetType = (PacketType) BitConverter.ToUInt32(packet, 8);
-        Debug.Log(string.Format("Got packet {0}", packetType));
+        var packetAsStr = Encoding.ASCII.GetString(packet);
+        var definition = new { Type = 0, Status = Status.Error };
+        var partialJson = JsonConvert.DeserializeAnonymousType(packetAsStr, definition);
+        var packetType = (PacketType)partialJson.Type;
 
-        Status status = (Status) BitConverter.ToUInt32(packet, 4);
+        //Debug.Log(string.Format("Got packet {0}", packetType));
+
+        var status = partialJson.Status;
         if (status != Status.Ok)
         {
             Debug.Log(string.Format("Packet {0} is not Ok", packetType));
@@ -64,112 +71,98 @@ public class Communication
 
         // TODO: test token etc.
 
-        uint payloadSize = BitConverter.ToUInt32(packet, 44);
-        byte[] payload = new byte[payloadSize];
-        Array.Copy(packet, 48, payload, 0, payloadSize);
-
         switch (packetType)
         {
             case PacketType.StartGame: 
-                ProcessStartGame(payload);
+                ProcessStartGame(packetAsStr);
                 break;
             case PacketType.TurnInfo:
-                ProcessTurnInfo(payload);
+                ProcessTurnInfo(packetAsStr);
                 break;
         }
     }
 
    
-    private byte[] MakeRequestPacket(PacketType packetType, byte[] payload)
+    private void SendRequestPacket(PacketType packetType, string payload)
     {
+        var sb = new StringBuilder();
+        var sw = new StringWriter(sb);
+        var jw = new JsonTextWriter(sw);
+
         var playerInfo = GameController.instance.PlayerInfo;
-        byte[] result = new byte[48 + payload.Length];
-        int resultPos = 0;
-        byte[] buffer;
 
-        // validation header
-        buffer = BitConverter.GetBytes((uint)0xDEADBEE);
-        Array.Copy(buffer, 0, result, resultPos, buffer.Length);
-        resultPos += 4;
+        jw.WriteStartObject();
 
-        // type
-        buffer = BitConverter.GetBytes((uint)packetType);
-        Array.Copy(buffer, 0, result, resultPos, buffer.Length);
-        resultPos += 4;
+        jw.WritePropertyName("ValidationHeader");
+        jw.WriteValue("DEADBEE");
 
-        // player token
-        Array.Copy(playerInfo.Token, 0, result, resultPos, playerInfo.Token.Length);
-        resultPos += playerInfo.Token.Length;
+        jw.WritePropertyName("Type");
+        jw.WriteValue(packetType);
 
-        // payload size
-        buffer = BitConverter.GetBytes((uint)payload.Length);
-        Array.Copy(buffer, 0, result, resultPos, buffer.Length);
-        resultPos += 4;
+        jw.WritePropertyName("Token");
+        jw.WriteValue(playerInfo.Token);
 
-        // payload
-        Array.Copy(payload, 0, result, resultPos, payload.Length);
-        resultPos += payload.Length;
+        if (payload.Length > 0)
+        {
+            jw.WritePropertyName("Payload");
+            jw.WriteRawValue(payload);
+        }
 
-        return result;
+        jw.WriteEndObject();
+
+        var jsonAsBytes = Encoding.ASCII.GetBytes(sb.ToString());
+        client.Send(jsonAsBytes);
     }
 
     private void SendTurnInfo(TurnState turnState)
     {
-        byte[] payload = new byte[8];
-        int payloadPos = 0;
-        byte[] buffer;
+        var payload = new 
+        {
+            IsPlayerMoving = turnState.IsPlayerMoving,
+            PlayerMoveDirection = turnState.PlayerMoveDirection,
+        };
 
-        // Is player moving
-        buffer = BitConverter.GetBytes((uint)(turnState.IsPlayerMoving ? 1 : 0));
-        Array.Copy(buffer, 0, payload, payloadPos, buffer.Length);
-        payloadPos += buffer.Length;
-
-        // Move direction
-        buffer = BitConverter.GetBytes((uint)turnState.PlayerMoveDirection);
-        Array.Copy(buffer, 0, payload, payloadPos, buffer.Length);
-        payloadPos += buffer.Length;
-
-        byte[] packetBuffer = MakeRequestPacket(PacketType.RegisterTurn, payload);
-        client.Send(packetBuffer);
+        SendRequestPacket(PacketType.RegisterTurn, JsonConvert.SerializeObject(payload));
     }
 
-    private void ProcessStartGame(byte[] payload)
+    private void ProcessStartGame(string packetAsStr)
     {
-        ProcessTurnInfo(payload);
+        ProcessTurnInfo(packetAsStr);
         GameController.instance.StartGame();
     }
 
-    private void ProcessTurnInfo(byte[] payload)
+    private void ProcessTurnInfo(string jsonStr)
     {
+        var definition = new
+        {
+            Payload = new
+            {
+                IsExit = false,
+                IsSpawn = false,
+                Connections = new
+                {
+                    Top = false,
+                    Right = false,
+                    Bottom = false,
+                    Left = false,
+                }
+            },
+        };
+        var turnInfoJson = JsonConvert.DeserializeAnonymousType(jsonStr, definition);
+
         var playerInfo = GameController.instance.PlayerInfo;
-
-        int pos = 0;
-        playerInfo.PointInfo.IsExit = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.IsSpawn = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasTopConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasRightConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasBottomConnection = BitConverter.ToBoolean(payload, pos);
-        pos += 4;
-
-        playerInfo.PointInfo.HasLeftConnection = BitConverter.ToBoolean(payload, pos);
-        //pos += 4;
-
-        Debug.Log(playerInfo);
+        playerInfo.PointInfo.IsExit = turnInfoJson.Payload.IsExit;
+        playerInfo.PointInfo.IsSpawn = turnInfoJson.Payload.IsSpawn;
+        playerInfo.PointInfo.HasTopConnection = turnInfoJson.Payload.Connections.Top;
+        playerInfo.PointInfo.HasRightConnection = turnInfoJson.Payload.Connections.Right;
+        playerInfo.PointInfo.HasBottomConnection = turnInfoJson.Payload.Connections.Bottom;
+        playerInfo.PointInfo.HasLeftConnection = turnInfoJson.Payload.Connections.Left;
 
         turnState.Reset();
     }
 
     private void SendJoinLobby()
     {
-        byte[] buffer = MakeRequestPacket(PacketType.StartGame, new byte[0]);
-        client.Send(buffer);
+        SendRequestPacket(PacketType.StartGame, "");
     }
 }

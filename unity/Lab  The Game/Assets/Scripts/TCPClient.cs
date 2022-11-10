@@ -75,30 +75,23 @@ public class TCPClient
 
     private void OnRecvThreadStart()
     {
-        try
+        socketConnection = new TcpClient(serverAddr, serverPort);
+        OnReady();
+        byte[] bytes = new byte[2048];
+        while (true)
         {
-            socketConnection = new TcpClient(serverAddr, serverPort);
-            OnReady();
-            byte[] bytes = new byte[1024];
-            while (true)
+            // Get a stream object for reading 				
+            using (NetworkStream stream = socketConnection.GetStream())
             {
-                // Get a stream object for reading 				
-                using (NetworkStream stream = socketConnection.GetStream())
+                int length;
+                // Read incomming stream into byte arrary. 					
+                while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
-                    int length;
-                    // Read incomming stream into byte arrary. 					
-                    while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
-                    {
-                        var buffer = new byte[length];
-                        Array.Copy(bytes, 0, buffer, 0, length);
-                        OnReceive(buffer);
-                    }
+                    var buffer = new byte[length];
+                    Array.Copy(bytes, 0, buffer, 0, length);
+                    OnReceive(buffer);
                 }
             }
-        }
-        catch (SocketException socketException)
-        {
-            Debug.Log("OnRecvThreadStart socket exception: " + socketException);
         }
     }
 }

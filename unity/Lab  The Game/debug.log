@@ -22784,3 +22784,620 @@ Got packet TurnInfo
 IsExit=True, IsSpawn=False, Connections = [False, True, False, False]
 Got packet TurnInfo
 IsExit=True, IsSpawn=False, Connections = [False, True, False, False]
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Game Started
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Move Right
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [False, False, True, True]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, False, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, True, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [False, False, True, True]
+Move Left
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Move Left
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [False, True, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, False, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, True, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [False, True, True, False]
+Move Right
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, False, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Game Started
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, True]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, True]
+Move Left
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [False, False, True, False]
+Move Bottom
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, False]
+Move Right
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, True]
+Move Right
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, False, False, True]
+Move Left
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=False, Connections = [True, True, False, True]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=True, IsSpawn=False, Connections = [True, False, True, False]
+Move Top
+Got packet RegisterTurn
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+JsonWriterException: No token to close. Path ''.
+Should not be capturing when there is a hotcontrol
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Newtonsoft.Json.JsonTextWriter
+{"ValidationHeader":"DEADBEE","Type":0,"Token":"000"}
+OnRecvThreadStart socket exception: System.InvalidOperationException: The operation is not allowed on non-connected sockets.
+  at System.Net.Sockets.TcpClient.GetStream () [0x00036] in <a6f433c7914f4a8aa11562de443cf6c1>:0 
+  at TCPClient.OnRecvThreadStart () [0x00033] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:86 
+OnRecvThreadStart socket exception: System.InvalidOperationException: The operation is not allowed on non-connected sockets.
+  at System.Net.Sockets.TcpClient.GetStream () [0x00036] in <a6f433c7914f4a8aa11562de443cf6c1>:0 
+  at TCPClient.OnRecvThreadStart () [0x0002d] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:86 
+OnRecvThreadStart socket exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: startIndex
+  at System.BitConverter.ToInt32 (System.Byte[] value, System.Int32 startIndex) [0x00010] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at System.BitConverter.ToUInt32 (System.Byte[] value, System.Int32 startIndex) [0x00000] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:52 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+OnRecvThreadStart socket exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: startIndex
+  at System.BitConverter.ToInt32 (System.Byte[] value, System.Int32 startIndex) [0x00010] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at System.BitConverter.ToUInt32 (System.Byte[] value, System.Int32 startIndex) [0x00000] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:52 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+OnRecvThreadStart socket exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: startIndex
+  at System.BitConverter.ToInt32 (System.Byte[] value, System.Int32 startIndex) [0x00010] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at System.BitConverter.ToUInt32 (System.Byte[] value, System.Int32 startIndex) [0x00000] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:52 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+Should not be capturing when there is a hotcontrol
+OnRecvThreadStart socket exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: startIndex
+  at System.BitConverter.ToInt32 (System.Byte[] value, System.Int32 startIndex) [0x00010] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at System.BitConverter.ToUInt32 (System.Byte[] value, System.Int32 startIndex) [0x00000] in <c2a97e0383e8404c9fc0ae19d58f57f1>:0 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:52 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":0,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+{"Status":0,"Token":"000","Type":1,"ValidationHeader":"DEADBEE"}
+Got packet 741358114
+Packet 741358114 is not Ok
+Should not be capturing when there is a hotcontrol
+Got packet StartGame
+OnRecvThreadStart socket exception: System.NullReferenceException: Object reference not set to an instance of an object
+  at Communication.ProcessTurnInfo (System.String jsonStr) [0x00028] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:155 
+  at Communication.ProcessStartGame (System.String packetAsStr) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:130 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x0006a] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:77 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+Got packet StartGame
+OnRecvThreadStart socket exception: System.NullReferenceException: Object reference not set to an instance of an object
+  at Communication.ProcessTurnInfo (System.String jsonStr) [0x00028] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:155 
+  at Communication.ProcessStartGame (System.String packetAsStr) [0x00000] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:130 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x0006a] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:77 
+  at TCPClient.OnRecvThreadStart () [0x0004c] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+Got packet StartGame
+OnRecvThreadStart socket exception: System.NullReferenceException: Object reference not set to an instance of an object
+  at Communication.ProcessTurnInfo (System.String jsonStr) [0x0002a] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:154 
+  at Communication.ProcessStartGame (System.String packetAsStr) [0x00001] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:130 
+  at Communication.ProcessPacketFromServer (System.Byte[] packet) [0x00091] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\Communication.cs:77 
+  at TCPClient.OnRecvThreadStart () [0x00055] in D:\PROJECTS\project_labyrinth_game\unity\Lab  The Game\Assets\Scripts\TCPClient.cs:94 
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 191.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JGot packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, False, True]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 192.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JMove Right
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,Direction]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Move Right
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,Direction]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Move Right
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,Direction]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, False, True]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 185.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JGot packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, True, False]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 185.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JGot packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, False, True]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 185.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JGot packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Game Started
+OnRecvThreadStart socket exception: Newtonsoft.Json.JsonReaderException: Additional text encountered after finished reading JSON content: {. Path '', line 1, position 171.
+  at Newtonsoft.Json.JsonTextReader.Read () [0x000a0] in /root/repo/Src/Newtonsoft.Json/JsonTextReader.cs:456 
+  at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType, System.Boolean checkAdditionalContent) [0x000db] in /root/repo/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs:202 
+  at Newtonsoft.Json.JsonSerializer.DeserializeInternal (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00046] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:904 
+  at Newtonsoft.Json.JsonSerializer.Deserialize (Newtonsoft.Json.JsonReader reader, System.Type objectType) [0x00000] in /root/repo/Src/Newtonsoft.Json/JsonSerializer.cs:883 
+  at Newtonsoft.Json.JsonConvert.DeserializeObject (System.String value, System.Type type, Newtonsoft.Json.JOnRecvThreadStart socket exception: System.Net.Sockets.SocketException (0x80004005): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Game Started
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Move Bottom
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,Direction]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Move Bottom
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,Direction]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, True]
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Game Started
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Move Bottom
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.UInt32,System.UInt32]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, True, True, True]
+Got packet StartGame
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Game Started
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Move Bottom
+JsonWriterException: Unsupported type: <>f__AnonymousType1`2[System.Boolean,System.UInt32]. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Got packet TurnInfo
+IsExit=False, IsSpawn=True, Connections = [False, False, True, False]
+Game Started
+Move Right
+JsonWriterException: Unsupported type: Communication+TurnInfoPayload. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Game Started
+Move Right
+JsonWriterException: Unsupported type: Communication+TurnInfoPayload. Use the JsonSerializer class to get the object's JSON representation. Path ''.
+Game Started
+Move Bottom
+JsonWriterException: Unsupported type: Communication+TurnInfoPayload. Use the JsonSerializer class to get the object's JSON representation. Path 'Payload'.
+Assets\Scripts\Communication.cs(119,29): error CS0104: 'Object' is an ambiguous reference between 'UnityEngine.Object' and 'object'
+Game Started
+Move Right
+JsonWriterException: Unsupported type: Communication+TurnInfoPayload. Use the JsonSerializer class to get the object's JSON representation. Path 'Payload'.
+Game Started
+Move Right
+InvalidOperationException: The operation is not allowed on non-connected sockets.
+Game Started
+Move Bottom
+Move Top
+Move Bottom
+Move Bottom
+Move Right
+Move Left
+Move Top
+Move Top
+Move Right
+Move Left
+Move Bottom
+Move Bottom
+Move Right
+Move Left
+Move Top
+Move Top
+Move Right
+Move Left
+Move Bottom
+Move Top
+Move Right
+Move Left
+Move Bottom
+Move Bottom
+Move Bottom
+Move Top
+Move Top
+Move Right
+Move Left
+Move Bottom
+Game Started
+Move Bottom
+Move Top
+Move Left
+Move Bottom
+Move Right
+Move Bottom
+Move Top
+Game Started
+Move Right
+Move Left
+Move Bottom
+Move Bottom
+Game Started
+Move Right
+Move Left
+Move Left
+Move Bottom
+Move Bottom
+Move Right
+Move Top
+Move Bottom

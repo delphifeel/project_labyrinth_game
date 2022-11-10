@@ -15,7 +15,7 @@ public struct PointInfoType
 public class PlayerInfo
 {
     // TODO: empty mocked token
-    public byte[] Token = new byte[32];
+    public string Token = "000";
 
     public PointInfoType PointInfo;
 
